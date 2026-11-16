@@ -91,6 +91,10 @@ input[type="checkbox"] { accent-color: var(--accent); margin: 0; }
 .objcard .yes { color: var(--accent); }
 .objcard dd.wrap { white-space: normal; }
 #c-dial { flex: none; width: 84px; height: 84px; }
+/* folded up, the card is its title bar and one line: when, and where it is */
+.x.fold { font-size: 20px; padding: 0 6px; align-self: center; }
+#c-brief, .objcard.folded #c-body { display: none; }
+.objcard.folded #c-brief { display: block; }
 #c-curve { display: block; width: 100%; height: 74px; margin-top: 8px; }
 
 .key h2 { margin: 0 0 2px; font: 600 16px var(--font-ui); }
@@ -254,11 +258,14 @@ input[type="checkbox"] { accent-color: var(--accent); margin: 0; }
 </section>
 
 <section class="panel dialog objcard" id="card" hidden>
-  <div class="panel-top"><b id="c-id"></b><span id="c-name"></span><button type="button" class="pill mini" id="c-sky" title="See this moment as the sky overhead">Sky</button><button type="button" class="x" id="c-close" aria-label="Close">×</button></div>
-  <p class="obj-facts" id="c-facts"></p>
-  <p class="obj-facts" id="c-best"></p>
-  <div class="obj-row"><dl id="c-dl"></dl><canvas id="c-dial" aria-label="Where it is in the sky"></canvas></div>
-  <canvas id="c-curve" aria-label="Its altitude through that night"></canvas>
+  <div class="panel-top"><b id="c-id"></b><span id="c-name"></span><button type="button" class="pill mini" id="c-sky" title="See this moment as the sky overhead">Sky</button><button type="button" class="x fold" id="c-fold" aria-controls="c-body"></button><button type="button" class="x" id="c-close" aria-label="Close">×</button></div>
+  <p class="obj-facts" id="c-brief"></p>
+  <div id="c-body">
+    <p class="obj-facts" id="c-facts"></p>
+    <p class="obj-facts" id="c-best"></p>
+    <div class="obj-row"><dl id="c-dl"></dl><canvas id="c-dial" aria-label="Where it is in the sky"></canvas></div>
+    <canvas id="c-curve" aria-label="Its altitude through that night"></canvas>
+  </div>
 </section>
 
 <script type="application/json" id="catalog">[["M1",5.575,22.017,"SNR","Crab Nebula"],["M2",21.5583,-0.817,"GC",""],["M3",13.7033,28.383,"GC",""],["M4",16.3933,-26.533,"GC",""],["M5",15.31,2.083,"GC",""],["M6",17.6683,-32.217,"OC","Butterfly Cluster"],["M7",17.8983,-34.817,"OC","Ptolemy Cluster"],["M8",18.0633,-24.383,"Neb","Lagoon Nebula"],["M9",17.32,-18.517,"GC",""],["M10",16.9517,-4.1,"GC",""],["M11",18.8517,-6.267,"OC","Wild Duck Cluster"],["M12",16.7867,-1.95,"GC",""],["M13",16.695,36.467,"GC","Hercules Cluster"],["M14",17.6267,-3.25,"GC",""],["M15",21.5,12.167,"GC",""],["M16",18.3133,-13.783,"Neb","Eagle Nebula"],["M17",18.3467,-16.183,"Neb","Omega Nebula"],["M18",18.3317,-17.133,"OC",""],["M19",17.0433,-26.267,"GC",""],["M20",18.0433,-23.033,"Neb","Trifid Nebula"],["M21",18.0767,-22.5,"OC",""],["M22",18.6067,-23.9,"GC",""],["M23",17.9467,-19.017,"OC",""],["M24",18.2817,-18.483,"Star cloud","Sagittarius Star Cloud"],["M25",18.5267,-19.25,"OC",""],["M26",18.7533,-9.4,"OC",""],["M27",19.9933,22.717,"PN","Dumbbell Nebula"],["M28",18.4083,-24.867,"GC",""],["M29",20.3983,38.517,"OC",""],["M30",21.6733,-23.183,"GC",""],["M31",0.7117,41.267,"Gal","Andromeda Galaxy"],["M32",0.7117,40.867,"Gal",""],["M33",1.565,30.65,"Gal","Triangulum Galaxy"],["M34",2.7,42.783,"OC",""],["M35",6.1483,24.333,"OC",""],["M36",5.6017,34.133,"OC",""],["M37",5.8733,32.55,"OC",""],["M38",5.4733,35.833,"OC",""],["M39",21.5367,48.433,"OC",""],["M40",12.3733,58.083,"Double star","Winnecke 4"],["M41",6.7667,-20.733,"OC",""],["M42",5.59,-5.45,"Neb","Orion Nebula"],["M43",5.5933,-5.267,"Neb","De Mairan's Nebula"],["M44",8.6683,19.983,"OC","Beehive Cluster"],["M45",3.7833,24.117,"OC","Pleiades"],["M46",7.6967,-14.817,"OC",""],["M47",7.61,-14.5,"OC",""],["M48",8.23,-5.8,"OC",""],["M49",12.4967,8.0,"Gal",""],["M50",7.0533,-8.333,"OC",""],["M51",13.4983,47.2,"Gal","Whirlpool Galaxy"],["M52",23.4033,61.583,"OC",""],["M53",13.215,18.167,"GC",""],["M54",18.9183,-30.483,"GC",""],["M55",19.6667,-30.967,"GC",""],["M56",19.2767,30.183,"GC",""],["M57",18.8933,33.033,"PN","Ring Nebula"],["M58",12.6283,11.817,"Gal",""],["M59",12.7,11.65,"Gal",""],["M60",12.7283,11.55,"Gal",""],["M61",12.365,4.467,"Gal",""],["M62",17.02,-30.117,"GC",""],["M63",13.2633,42.033,"Gal","Sunflower Galaxy"],["M64",12.945,21.683,"Gal","Black Eye Galaxy"],["M65",11.315,13.083,"Gal",""],["M66",11.3367,12.983,"Gal",""],["M67",8.855,11.817,"OC",""],["M68",12.6583,-26.75,"GC",""],["M69",18.5233,-32.35,"GC",""],["M70",18.72,-32.3,"GC",""],["M71",19.8967,18.783,"GC",""],["M72",20.8917,-12.533,"GC",""],["M73",20.9833,-12.633,"Asterism",""],["M74",1.6117,15.783,"Gal",""],["M75",20.1017,-21.917,"GC",""],["M76",1.7067,51.567,"PN","Little Dumbbell Nebula"],["M77",2.7117,-0.017,"Gal",""],["M78",5.7783,0.05,"Neb",""],["M79",5.4083,-24.55,"GC",""],["M80",16.2833,-22.983,"GC",""],["M81",9.9267,69.067,"Gal","Bode's Galaxy"],["M82",9.93,69.683,"Gal","Cigar Galaxy"],["M83",13.6167,-29.867,"Gal","Southern Pinwheel Galaxy"],["M84",12.4183,12.883,"Gal",""],["M85",12.4233,18.183,"Gal",""],["M86",12.4367,12.95,"Gal",""],["M87",12.5133,12.383,"Gal","Virgo A"],["M88",12.5333,14.417,"Gal",""],["M89",12.595,12.55,"Gal",""],["M90",12.6133,13.167,"Gal",""],["M91",12.59,14.5,"Gal",""],["M92",17.285,43.133,"GC",""],["M93",7.7433,-23.867,"OC",""],["M94",12.8483,41.117,"Gal",""],["M95",10.7333,11.7,"Gal",""],["M96",10.78,11.817,"Gal",""],["M97",11.2467,55.017,"PN","Owl Nebula"],["M98",12.23,14.9,"Gal",""],["M99",12.3133,14.417,"Gal",""],["M100",12.3817,15.817,"Gal",""],["M101",14.0533,54.35,"Gal","Pinwheel Galaxy"],["M102",15.1083,55.767,"Gal","Spindle Galaxy"],["M103",1.5533,60.7,"OC",""],["M104",12.6667,-11.617,"Gal","Sombrero Galaxy"],["M105",10.7967,12.583,"Gal",""],["M106",12.3167,47.3,"Gal",""],["M107",16.5417,-13.05,"GC",""],["M108",11.1917,55.667,"Gal",""],["M109",11.96,53.383,"Gal",""],["M110",0.6733,41.683,"Gal",""]]</script>
@@ -1164,6 +1171,7 @@ function fillCard() {
   ];
   if (m) rows.push(['Moon', m.alt > -0.833 ? `${Math.max(0, Math.round(m.alt))}° up, ${Math.round(100 * m.frac)}% lit` : 'down']);
   rows.push(['View', ok ? 'yes' : alt < VIS_ALT ? `no, under ${VIS_ALT}°` : sky ? 'no, not fully dark' : 'no, moonlit']);
+  $('c-brief').textContent = `${dayLabel(tc >= 24 ? d + 1 : d)} ${hm(tc)} · ${alt < 0 ? 'below the horizon' : `${Math.round(alt)}° up, ${COMPASS[Math.round(az / 22.5) % 16]}`} · ${ok ? 'in view' : 'not in view'}`;
   const dl = $('c-dl');
   dl.replaceChildren();
   for (const [k, v] of rows) {
@@ -1174,6 +1182,7 @@ function fillCard() {
     if (k === 'When') dd.className = 'wrap'; // the small hours add the night's date; let that wrap, not vanish
     dl.append(dt, dd);
   }
+  if (cardFolded) return; // nothing to draw on while its canvases are folded away
   drawDial(alt, az, m, jdAt(d, t));
   drawNightCurve(o, d, t);
 }
@@ -1399,6 +1408,23 @@ $('zin').addEventListener('click', () => animateZoom(...centre(), 2));
 $('zout').addEventListener('click', () => animateZoom(...centre(), 0.5));
 $('zfit').addEventListener('click', () => { view.s = 1; clampView(); redraw(); });
 $('c-close').addEventListener('click', () => select(null));
+// the card folds up to its title and one line, so it covers less of the chart (most use on a phone); remembered
+let cardFolded = false;
+try { cardFolded = localStorage.getItem('messier-calendar-card-folded') === '1'; } catch {}
+function syncFold() {
+  const b = $('c-fold');
+  $('card').classList.toggle('folded', cardFolded);
+  b.textContent = cardFolded ? '▾' : '▴';
+  b.setAttribute('aria-expanded', String(!cardFolded));
+  b.setAttribute('aria-label', cardFolded ? 'Unfold the card' : 'Fold the card up');
+}
+$('c-fold').addEventListener('click', () => {
+  cardFolded = !cardFolded;
+  try { localStorage.setItem('messier-calendar-card-folded', cardFolded ? '1' : '0'); } catch {}
+  syncFold();
+  if (sel) { fillCard(); DIALOGS.card.open(); }
+});
+syncFold();
 // the key and the location panel share the space above the bar: one at a time, and either closes the object card
 const PANELS = { key: 'keybtn', place: 'placebtn', objs: 'objsbtn' };
 function showPanel(id) {
